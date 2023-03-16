@@ -3,7 +3,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/yogeshahiray/sysfo/common"
+	"sysfo/common"
 )
 
 func ProcessSystemCommand() {

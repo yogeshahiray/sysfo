@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/table"
+	"sysfo/common"
+	"sysfo/table"
 	"strings"
 )
 

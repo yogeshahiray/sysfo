@@ -3,8 +3,8 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/table"
+	"sysfo/common"
+	"sysfo/table"
 )
 
 // This function will populate the information of redfish version of all hosts

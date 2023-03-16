@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	common2 "github.com/stmcginnis/gofish/common"
 	"github.com/stmcginnis/gofish/redfish"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/log"
+	"sysfo/common"
+	"sysfo/log"
 	"io"
 )
 

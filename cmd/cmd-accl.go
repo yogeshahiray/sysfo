@@ -2,9 +2,9 @@ package cmd
 
 import (
 	common2 "github.com/stmcginnis/gofish/common"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/log"
-	"github.com/yogeshahiray/sysfo/table"
+     "sysfo/common"
+	"sysfo/log"
+	"sysfo/table"
 )
 
 //This function collects the information of Acclerators installed in the system

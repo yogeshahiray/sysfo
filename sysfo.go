@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/yogeshahiray/sysfo/cmd"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/log"
+	"sysfo/cmd"
+	"sysfo/common"
+	"sysfo/log"
 )
 
 func main() {

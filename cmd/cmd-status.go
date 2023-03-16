@@ -3,9 +3,9 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/log"
-	"github.com/yogeshahiray/sysfo/table"
+	"sysfo/common"
+	"sysfo/log"
+	"sysfo/table"
 	"strconv"
 )
 

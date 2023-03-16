@@ -5,9 +5,9 @@ import (
 	"encoding/json"
 	"fmt"
 	common2 "github.com/stmcginnis/gofish/common"
-	"github.com/yogeshahiray/sysfo/common"
-	"github.com/yogeshahiray/sysfo/log"
-	"github.com/yogeshahiray/sysfo/table"
+	"sysfo/common"
+	"sysfo/log"
+	"sysfo/table"
 	"io"
 	"strconv"
 )
@@ -198,7 +198,7 @@ func processNICsCommandOutput() {
 
 		} else {
 			//	rows = append(rows, []interface{}{e.Ip, "NA", "NA", "NA", "NA", "NA", "NA", "Down"})
-			log.Info("No systems detected")
+			log.Fatal("No systems detected")
 		}
 	}
 	table.WriteCommandOutput(rows, []string{"BMC", "SN", "Model", "NIC", "Location", "Fw Ver", "# Ports", "MAC(s)"})

@@ -5,7 +5,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"github.com/bndr/gotabulate"
-	"github.com/yogeshahiray/sysfo/common"
+	"sysfo/common"
 	"os"
 )
 
@@ -87,6 +87,7 @@ func PrintTable(rows [][]interface{}, headers []string) {
 }
 
 func WriteCommandOutput(rows [][]interface{}, headers []string) {
+
 	if len(common.InputParams.OutFile) > 0 {
 		WriteTable(rows, headers, common.InputParams.OutFile)
 	} else {
