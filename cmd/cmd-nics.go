@@ -30,76 +30,76 @@ func getNetworkAdaptersInfo(info common.Sysinfo) string {
 	return s
 }
 
-//func getDellNetworkAdapters(entity common2.Entity, info *common.Sysinfo, ID string) {
-//	// First get the adapter count
-//	url := "/redfish/v1/Chassis/" + ID + "/NetworkAdapters"
-//	//fmt.Println("URL prepared : ", url)
-//	resp, err := entity.Client.Get(url)
-//	if err != nil {
-//		log.Fatal("Failed to get Network adapters : error [%s]", err)
-//	} else {
-//		bodyBytes, err := io.ReadAll(resp.Body)
-//		if err != nil {
-//			log.Fatal("Failed to read response bytes")
-//		}
-//		json.Unmarshal(bodyBytes, &info.NetworkAdapters.Urls)
-//	}
-//	//Get the details of each adapter
-//	for _, e := range info.NetworkAdapters.Urls.Members {
-//		dev := common.NetworkAdapter{}
-//		log.Info("Adapter URL := %s", e.AdapterUrl)
-//		resp, err := entity.Client.Get(e.AdapterUrl)
-//		if err != nil {
-//			log.Fatal("Failed to get network adapter details")
-//		}
-//		bodyBytes, err := io.ReadAll(resp.Body)
-//		if err != nil {
-//			log.Fatal("Failed to read response bytes")
-//		}
-//		err = json.Unmarshal(bodyBytes, &dev)
-//		if err != nil {
-//			log.Fatal("%v", err)
-//		}
-//		info.NetworkAdapters.Adapters = append(info.NetworkAdapters.Adapters, dev)
-//	}
-//
-//}
-
 func getDellNetworkAdapters(entity common2.Entity, info *common.Sysinfo, ID string) {
-	// In case of Dell, get the network interfaces first
-	n, err := info.System.NetworkInterfaces()
+	// First get the adapter count
+	url := "/redfish/v1/Chassis/" + ID + "/NetworkAdapters"
+	//fmt.Println("URL prepared : ", url)
+	resp, err := entity.Client.Get(url)
 	if err != nil {
-		log.Fatal("Failed to get network devices")
-	}
-	for _, e := range n {
-		dev := common.NetworkAdapter{}
-		ports, err := e.NetworkPorts()
-		dev.Name = e.Name
+		log.Fatal("Failed to get Network adapters : error [%s]", err)
+	} else {
+		bodyBytes, err := io.ReadAll(resp.Body)
 		if err != nil {
-			log.Fatal("Failed to get network devices")
+			log.Fatal("Failed to read response bytes")
 		}
-		for _, p := range ports {
-			port := common.NetworkPort{}
-			port.LinkStatus = string(p.LinkStatus)
-			port.MacAddress = p.AssociatedNetworkAddresses[0]
-			port.Status.Health = string(p.Status.Health)
-
-			dev.PhysicalPorts = append(dev.PhysicalPorts, port)
-
+		json.Unmarshal(bodyBytes, &info.NetworkAdapters.Urls)
+	}
+	//Get the details of each adapter
+	for _, e := range info.NetworkAdapters.Urls.Members {
+		dev := common.NetworkAdapter{}
+		log.Info("Adapter URL := %s", e.AdapterUrl)
+		resp, err := entity.Client.Get(e.AdapterUrl)
+		if err != nil {
+			log.Fatal("Failed to get network adapter details")
+		}
+		bodyBytes, err := io.ReadAll(resp.Body)
+		if err != nil {
+			log.Fatal("Failed to read response bytes")
+		}
+		err = json.Unmarshal(bodyBytes, &dev)
+		if err != nil {
+			log.Fatal("%v", err)
 		}
 		info.NetworkAdapters.Adapters = append(info.NetworkAdapters.Adapters, dev)
 	}
-	// For Dell, look into PCI devices as well
-	for _, e := range info.PCIDevices.Devices {
-		if e.DeviceClass == "NetworkController" {
-			dev := common.NetworkAdapter{}
-
-			dev.Name = e.Name
-			info.NetworkAdapters.Adapters = append(info.NetworkAdapters.Adapters, dev)
-		}
-	}
 
 }
+
+//func getDellNetworkAdapters(entity common2.Entity, info *common.Sysinfo, ID string) {
+//	// In case of Dell, get the network interfaces first
+//	n, err := info.System.NetworkInterfaces()
+//	if err != nil {
+//		log.Fatal("Failed to get network devices")
+//	}
+//	for _, e := range n {
+//		dev := common.NetworkAdapter{}
+//		ports, err := e.NetworkPorts()
+//		dev.Name = e.Name
+//		if err != nil {
+//			log.Fatal("Failed to get network devices")
+//		}
+//		for _, p := range ports {
+//			port := common.NetworkPort{}
+//			port.LinkStatus = string(p.LinkStatus)
+//			port.MacAddress = p.AssociatedNetworkAddresses[0]
+//			port.Status.Health = string(p.Status.Health)
+//
+//			dev.PhysicalPorts = append(dev.PhysicalPorts, port)
+//
+//		}
+//		info.NetworkAdapters.Adapters = append(info.NetworkAdapters.Adapters, dev)
+//	}
+//	// For Dell, look into PCI devices as well
+//	for _, e := range info.PCIDevices.Devices {
+//		if e.DeviceClass == "NetworkController" {
+//			dev := common.NetworkAdapter{}
+//
+//			dev.Name = e.Name
+//			info.NetworkAdapters.Adapters = append(info.NetworkAdapters.Adapters, dev)
+//		}
+//	}
+//
+//}
 
 func getHPENetworkAdapters(entity common2.Entity, info *common.Sysinfo, ID string) {
 	// First get the adapter count

@@ -2,7 +2,7 @@
 package cmd
 
 import (
-	"github.com/yogeshahiray/sysfo/common"
+	"sysfo/common"
 )
 
 // Command structure
